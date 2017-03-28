@@ -593,13 +593,15 @@ it.describe("fast-csv parsing", function (it) {
     it.should("allow specifying of columns", function (next) {
         var actual = [];
         csv
-            .fromPath(path.resolve(__dirname, "./assets/test2.csv"), {headers: ["first_name", "last_name", "email_address", "address"]})
+            .fromPath(path.resolve(__dirname, "./assets/test29.csv"), {headers: ["first_name", "last_name", "email_address", "address"]})
             .on("data", function (data, index) {
                 actual.push(data);
             })
             .on("error", next)
             .on("end", function (count) {
-                assert.deepEqual(actual, expected1);
+                var test = actual.slice(0);
+                test.splice(0,1);
+                assert.deepEqual(test, expected1);
                 assert.equal(count, actual.length);
                 next();
             });
@@ -608,13 +610,15 @@ it.describe("fast-csv parsing", function (it) {
     it.should("allow specifying of columns as a sparse array", function (next) {
         var actual = [];
         csv
-            .fromPath(path.resolve(__dirname, "./assets/test2.csv"), {headers: ["first_name" , , "email_address" , , ]})
+            .fromPath(path.resolve(__dirname, "./assets/test30.csv"), {headers: ["first_name" , , "email_address" , , ]})
             .on("data", function (data, index) {
                 actual.push(data);
             })
             .on("error", next)
             .on("end", function (count) {
-                assert.deepEqual(actual, expected1_sparse);
+                var test = actual.slice(0);
+                test.splice(0,1);
+                assert.deepEqual(test, expected1_sparse);
                 assert.equal(count, actual.length);
                 next();
             });
